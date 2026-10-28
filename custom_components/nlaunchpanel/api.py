@@ -48,9 +48,13 @@ class NLaunchPanelClient:
                 headers={"Authorization": f"Bearer {self._token}", "Accept": "application/json"},
                 timeout=TIMEOUT,
             ) as resp:
+                # Le corps est lu en JSON quel que soit l'en-tête : un mandataire
+                # devant le panel peut le changer, le contenu reste le même.
                 data: Any = None
-                if resp.content_type == "application/json":
-                    data = await resp.json()
+                try:
+                    data = await resp.json(content_type=None)
+                except (ValueError, aiohttp.ContentTypeError):
+                    data = None
                 if resp.status == 401:
                     raise NLaunchPanelAuthError(_message(data, resp.status))
                 if resp.status == 403 and isinstance(data, dict) and data.get("error") == "read_only_token":
