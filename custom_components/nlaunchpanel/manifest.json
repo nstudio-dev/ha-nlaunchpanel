@@ -1,0 +1,12 @@
+{
+  "domain": "nlaunchpanel",
+  "name": "NLaunchPanel",
+  "codeowners": ["@nstudio-dev"],
+  "config_flow": true,
+  "documentation": "https://github.com/nstudio-dev/ha-nlaunchpanel",
+  "integration_type": "hub",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/nstudio-dev/ha-nlaunchpanel/issues",
+  "requirements": [],
+  "version": "0.1.0"
+}

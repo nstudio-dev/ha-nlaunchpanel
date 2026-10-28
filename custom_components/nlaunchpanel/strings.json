@@ -1,0 +1,73 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "NLaunchPanel",
+        "description": "Your panel's instances as Home Assistant devices. Create an API token in the panel (Settings › API tokens): a read token gives the sensors only, a write token adds the buttons and the on/off switch.",
+        "data": {
+          "url": "Panel address",
+          "token": "API token",
+          "persistent_notifications": "A persistent notification for each panel alert"
+        }
+      },
+      "reauth_confirm": {
+        "title": "New API token",
+        "description": "The panel {url} refuses the current token (expired, revoked, or its owner left the organisation). Paste a new one.",
+        "data": {
+          "token": "API token"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "The panel cannot be reached at this address.",
+      "invalid_auth": "The panel refuses this token.",
+      "invalid_token_format": "A panel API token starts with nlp_.",
+      "unknown": "The panel answered unexpectedly."
+    },
+    "abort": {
+      "already_configured": "This panel is already configured.",
+      "reauth_successful": "The new token is accepted."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "data": {
+          "persistent_notifications": "A persistent notification for each panel alert"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "status": {
+        "name": "State",
+        "state": {
+          "running": "Running",
+          "stopped": "Stopped",
+          "deploying": "Deploying",
+          "starting": "Starting",
+          "stopping": "Stopping",
+          "restarting": "Restarting",
+          "failed": "Failed",
+          "crashed": "Crashed",
+          "created": "Created"
+        }
+      },
+      "cpu": { "name": "Processor" },
+      "memory": { "name": "Memory" },
+      "last_backup": { "name": "Last backup" }
+    },
+    "button": {
+      "restart": { "name": "Restart" },
+      "backup": { "name": "Back up now" },
+      "deploy": { "name": "Redeploy" }
+    },
+    "switch": {
+      "power": { "name": "Power" }
+    },
+    "update": {
+      "image": { "name": "Image" }
+    }
+  }
+}

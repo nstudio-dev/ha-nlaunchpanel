@@ -1,0 +1,73 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "NLaunchPanel",
+        "description": "Les instances de votre panel comme appareils de Home Assistant. Créez un jeton d'API dans le panel (Paramètres › Jetons d'API) : un jeton « lecture » donne les capteurs seuls, un jeton « écriture » ajoute les boutons et l'interrupteur marche/arrêt.",
+        "data": {
+          "url": "Adresse du panel",
+          "token": "Jeton d'API",
+          "persistent_notifications": "Une notification persistante pour chaque alerte du panel"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Nouveau jeton d'API",
+        "description": "Le panel {url} refuse le jeton actuel (expiré, révoqué, ou son propriétaire a quitté l'organisation). Collez-en un nouveau.",
+        "data": {
+          "token": "Jeton d'API"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Le panel est injoignable à cette adresse.",
+      "invalid_auth": "Le panel refuse ce jeton.",
+      "invalid_token_format": "Un jeton d'API du panel commence par nlp_.",
+      "unknown": "Le panel a répondu de façon inattendue."
+    },
+    "abort": {
+      "already_configured": "Ce panel est déjà configuré.",
+      "reauth_successful": "Le nouveau jeton est accepté."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "data": {
+          "persistent_notifications": "Une notification persistante pour chaque alerte du panel"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "status": {
+        "name": "État",
+        "state": {
+          "running": "En marche",
+          "stopped": "Arrêtée",
+          "deploying": "Déploiement",
+          "starting": "Démarrage",
+          "stopping": "Arrêt en cours",
+          "restarting": "Redémarrage",
+          "failed": "En échec",
+          "crashed": "Plantée",
+          "created": "Créée"
+        }
+      },
+      "cpu": { "name": "Processeur" },
+      "memory": { "name": "Mémoire" },
+      "last_backup": { "name": "Dernière sauvegarde" }
+    },
+    "button": {
+      "restart": { "name": "Redémarrer" },
+      "backup": { "name": "Sauvegarder maintenant" },
+      "deploy": { "name": "Redéployer" }
+    },
+    "switch": {
+      "power": { "name": "Marche / arrêt" }
+    },
+    "update": {
+      "image": { "name": "Image" }
+    }
+  }
+}
