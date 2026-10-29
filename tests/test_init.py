@@ -28,8 +28,10 @@ async def _installer(hass: HomeAssistant, entree: MockConfigEntry) -> None:
 
 
 async def _tour(hass: HomeAssistant) -> None:
+    """Un tour du coordinateur. Home Assistant le lance en tâche de fond :
+    il faut l'attendre explicitement."""
     async_fire_time_changed(hass, dt_util.utcnow() + timedelta(seconds=61))
-    await hass.async_block_till_done()
+    await hass.async_block_till_done(wait_background_tasks=True)
 
 
 def _entite(hass: HomeAssistant, instance: str, cle: str) -> str:
