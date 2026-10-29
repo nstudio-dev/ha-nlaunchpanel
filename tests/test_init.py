@@ -124,6 +124,8 @@ async def test_les_instances_vont_et_viennent(hass: HomeAssistant, aioclient_moc
     nouvelle = {"id": "inst-mqtt", "name": "mosquitto", "status": "running", "source_type": "docker", "docker_image": "eclipse-mosquitto:2"}
     faux_panel(aioclient_mock, [JELLYFIN, nouvelle])
     await _tour(hass)
+    coord = entree.runtime_data.coordinator
+    assert "inst-mqtt" in (coord.data or {}), f"données {list(coord.data or {})} ; appels {[str(c[1]) for c in aioclient_mock.mock_calls][:6]}"
     appareils = dr.async_get(hass)
     # La nouvelle arrive, la supprimée part.
     assert hass.states.get(_entite(hass, "inst-mqtt", "status")).state == "running"
@@ -157,7 +159,7 @@ async def test_la_cloche(hass: HomeAssistant, aioclient_mock: AiohttpClientMocke
     nouvelle = {"id": "n2", "kind": "instance.crashed", "severity": "critical", "title": "jellyfin est tombé", "body": "Redémarrage en boucle", "link": "/instances/inst-jelly", "created_at": "2026-10-28T20:00:00Z"}
     faux_panel(aioclient_mock, notifications=[nouvelle, ancienne])
     await _tour(hass)
-    assert len(evenements) == 1
+    assert len(evenements) == 1, f"vues {entree.runtime_data.coordinator._vues} ; appels {[str(c[1]) for c in aioclient_mock.mock_calls]}"
     assert evenements[0].data["title"] == "jellyfin est tombé"
     assert evenements[0].data["severity"] == "critical"
     # La notification persistante (option cochée), une seule.
